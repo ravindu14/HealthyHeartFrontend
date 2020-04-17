@@ -1,0 +1,153 @@
+import React, { Component } from "react";
+import { View, StyleSheet, Dimensions } from "react-native";
+import { List, withStyles, Avatar, Text, Button } from "react-native-ui-kitten";
+import { connect } from "react-redux";
+import { LinearGradient } from "expo-linear-gradient";
+import Speedometer from "react-native-speedometer-chart";
+
+import {
+  imageStepCountIcon,
+  imageTemperatureIcon,
+  imageFoodIcon,
+  imageSummaryIcon,
+  imageHealingStatusIcon,
+  imagePlaceholder,
+} from "@app/assets";
+import LayoutsListItem from "@app/components/home/LayoutsListItemComponent";
+import { navigate, navigateAndReset } from "@app/actions/routes";
+import {
+  imageLogoutIcon,
+  imageAvatarMale,
+  imageAvatarFemale,
+} from "@app/assets";
+import { LOGOUT_ACTION, GENDER_TYPES } from "@app/constants/auth";
+import { userLogout } from "@app/actions/auth";
+
+const { width } = Dimensions.get("window");
+const itemWidth: number = width / 2 - 16;
+
+class HomeScreen extends Component {
+  renderItem = (info) => {
+    const {
+      themedStyle: { item: itemStyles },
+    } = this.props;
+    if (info.item.action) {
+      return (
+        <LayoutsListItem
+          style={itemStyles}
+          data={info.item}
+          onPress={info.item.action}
+        />
+      );
+    }
+    return (
+      <LayoutsListItem
+        style={itemStyles}
+        data={info.item}
+        onPress={() => this.props.navigate(info.item.route)}
+      />
+    );
+  };
+
+  render() {
+    const { themedStyle, userLogout, gender, profileImage, risk } = this.props;
+    const avatarImage = profileImage
+      ? { uri: profileImage }
+      : gender === GENDER_TYPES.MALE
+      ? imageAvatarMale
+      : imageAvatarFemale;
+    return (
+      <LinearGradient colors={["#00a2ff", "#ffffff"]} style={{ flex: 1 }}>
+        <View style={[themedStyle.detailsContainer]}>
+          <Avatar style={themedStyle.profileAvatar} source={avatarImage} />
+          <Button
+            appearance="outline"
+            size="small"
+            style={{
+              borderColor: "#ffffff",
+              backgroundColor: "transparent",
+              marginBottom: 10,
+              marginTop: 10,
+            }}
+            textStyle={{ color: "#ffffff" }}
+            onPress={userLogout}
+          >
+            Logout
+          </Button>
+        </View>
+        <List
+          style={themedStyle.container}
+          numColumns={2}
+          renderItem={this.renderItem}
+          data={[
+            {
+              title: "Function 1",
+              icon: imagePlaceholder,
+              route: "Risk Calculate",
+            },
+            {
+              title: "Function 2",
+              icon: imagePlaceholder,
+              route: "Diet Plan",
+            },
+            {
+              title: "Function 3",
+              icon: imagePlaceholder,
+              route: "Stress Plan",
+            },
+            {
+              title: "Function 4",
+              icon: imagePlaceholder,
+              route: "Temp & Humidity",
+            },
+          ]}
+        />
+      </LinearGradient>
+    );
+  }
+}
+
+const Actions = {
+  navigate,
+  userLogout,
+  navigateAndReset,
+};
+
+const HomeScreenContainer = withStyles(HomeScreen, () => ({
+  container: {
+    paddingTop: 8,
+    backgroundColor: "transparent",
+  },
+  item: {
+    flex: 1,
+    height: 130,
+    maxWidth: itemWidth,
+    marginHorizontal: 8,
+    marginVertical: 8,
+    backgroundColor: "transparent",
+  },
+  detailsContainer: {
+    alignItems: "center",
+    paddingTop: 30,
+    paddingBottom: 20,
+    height: 250,
+  },
+  nameLabel: {
+    marginTop: 16,
+    color: "#004d8c",
+    fontWeight: 700,
+  },
+  profileAvatar: {
+    width: 124,
+    height: 124,
+  },
+}));
+
+function mapStateToProps(state) {
+  return {
+    gender: state.auth.user.gender,
+    profileImage: state.auth.user.image,
+  };
+}
+
+export default connect(mapStateToProps, Actions)(HomeScreenContainer);
