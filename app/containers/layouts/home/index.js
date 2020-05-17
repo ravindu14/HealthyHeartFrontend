@@ -6,12 +6,10 @@ import { LinearGradient } from "expo-linear-gradient";
 import Speedometer from "react-native-speedometer-chart";
 
 import {
-  imageStepCountIcon,
-  imageTemperatureIcon,
-  imageFoodIcon,
-  imageSummaryIcon,
-  imageHealingStatusIcon,
-  imagePlaceholder,
+  dietPlanIcon,
+  heartRateIcon,
+  moodPlanIcon,
+  exercisePlanIcon,
 } from "@app/assets";
 import LayoutsListItem from "@app/components/home/LayoutsListItemComponent";
 import { navigate, navigateAndReset } from "@app/actions/routes";
@@ -57,7 +55,7 @@ class HomeScreen extends Component {
       ? imageAvatarMale
       : imageAvatarFemale;
     return (
-      <LinearGradient colors={["#00a2ff", "#ffffff"]} style={{ flex: 1 }}>
+      <LinearGradient colors={["#553fd1", "#ffffff"]} style={{ flex: 1 }}>
         <View style={[themedStyle.detailsContainer]}>
           <Avatar style={themedStyle.profileAvatar} source={avatarImage} />
           <Button
@@ -69,7 +67,7 @@ class HomeScreen extends Component {
               marginBottom: 10,
               marginTop: 10,
             }}
-            textStyle={{ color: "#ffffff" }}
+            textStyle={{ color: "#ffffff", fontWeight: "bold" }}
             onPress={userLogout}
           >
             Logout
@@ -81,24 +79,24 @@ class HomeScreen extends Component {
           renderItem={this.renderItem}
           data={[
             {
-              title: "Function 1",
-              icon: imagePlaceholder,
+              title: "Heart rate detector",
+              icon: heartRateIcon,
               route: "Risk Calculate",
             },
             {
-              title: "Function 2",
-              icon: imagePlaceholder,
+              title: "Diet Balancer",
+              icon: dietPlanIcon,
               route: "Diet Plan",
             },
             {
-              title: "Function 3",
-              icon: imagePlaceholder,
+              title: "Mood Fixer",
+              icon: moodPlanIcon,
               route: "Stress Plan",
             },
             {
-              title: "Function 4",
-              icon: imagePlaceholder,
-              route: "Temp & Humidity",
+              title: "Fitness Checker",
+              icon: exercisePlanIcon,
+              route: "Exercise Warning",
             },
           ]}
         />
@@ -125,6 +123,7 @@ const HomeScreenContainer = withStyles(HomeScreen, () => ({
     marginHorizontal: 8,
     marginVertical: 8,
     backgroundColor: "transparent",
+    color: "#2f0bbd",
   },
   detailsContainer: {
     alignItems: "center",

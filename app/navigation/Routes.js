@@ -10,7 +10,9 @@ import { SignIn, SignUp } from "@app/containers/layouts/auth";
 import DietPlanScreen from "@app/containers/layouts/dietBalancer";
 import StressPlanScreen from "@app/containers/layouts/moodFixer";
 import RiskCalculatorScreen from "@app/containers/layouts/riskCalculator";
-import ComplicationCalculateScreen from "@app/containers/layouts/complicationCalculator";
+
+import ExerciseWarningScreen from "@app/containers/layouts/fitnessChecker";
+import ExerciseTestScreen from "@app/containers/layouts/fitnessChecker/screens/exerciseTest";
 
 import { ArrowBackIcon } from "@app/assets/icons";
 import { TopNavigationBar } from "./components/topNavigationBar";
@@ -72,9 +74,10 @@ const RiskCalculatorNavigationMap = createStackNavigator(
   }
 );
 
-const ComplicationNavigationMap = createStackNavigator(
+const ExerciseNavigationMap = createStackNavigator(
   {
-    ["Complication Calculator"]: ComplicationCalculateScreen,
+    ["Exercise Warning"]: ExerciseWarningScreen,
+    ["Exercise Test"]: ExerciseTestScreen,
   },
   {
     defaultNavigationOptions: {
@@ -88,8 +91,8 @@ const DashboardNavigationMap = createStackNavigator(
     ["Home"]: HomeScreen,
     ["Diet Plan"]: DietPlanNavigationMap,
     ["Risk Calculate"]: RiskCalculatorNavigationMap,
-    ["Complication Calculate"]: ComplicationNavigationMap,
     ["Stress Plan"]: StressPlanNavigationMap,
+    ["Exercise Warning"]: ExerciseNavigationMap,
   },
   {
     defaultNavigationOptions: MenuTopNavigationParams,

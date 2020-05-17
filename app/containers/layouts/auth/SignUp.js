@@ -56,7 +56,7 @@ class SignUp extends Component {
     const { themedStyle, status, notification } = this.props;
     return (
       <ScrollableAvoidKeyboardComponent style={themedStyle.container}>
-        <LinearGradient colors={["#00a2ff", "#ffffff"]} style={{ flex: 1 }}>
+        <LinearGradient colors={["#553fd1", "#ffffff"]} style={{ flex: 1 }}>
           <View style={themedStyle.headerContainer}>
             <Text style={themedStyle.authLabel} category="s1">
               Create an account

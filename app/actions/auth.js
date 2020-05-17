@@ -74,37 +74,36 @@ export function isUserLogged() {
 
 export function userLogin(payload) {
   return (dispatch, getState, serviceManager) => {
-    dispatch(navigateAndReset("Dashboard"));
-    // const authService = serviceManager.get("AuthService");
-    // const storageService = serviceManager.get("StorageService");
-    // dispatch({
-    //   type: AUTH_INIT,
-    // });
-    // authService
-    //   .login(payload)
-    //   .then(({ success, message, token, gender }) => {
-    //     if (success) {
-    //       storageService.saveItems([
-    //         [AUTH_TOKEN_KEY, token.key],
-    //         [GENDER_KEY, gender],
-    //       ]);
-    //       serviceManager.get("ApiService").authToken = token.key;
-    //       dispatch(authSuccess({ gender }));
-    //       dispatch(navigateAndReset("Dashboard"));
-    //     } else {
-    //       dispatch({
-    //         type: AUTH_FAILURE,
-    //         payload: { message },
-    //       });
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     dispatch({
-    //       type: AUTH_FAILURE,
-    //       payload: { message: "Request failed!" },
-    //     });
-    //   });
+    const authService = serviceManager.get("AuthService");
+    const storageService = serviceManager.get("StorageService");
+    dispatch({
+      type: AUTH_INIT,
+    });
+    authService
+      .login(payload)
+      .then(({ success, message, token, gender }) => {
+        if (success) {
+          storageService.saveItems([
+            [AUTH_TOKEN_KEY, token.key],
+            [GENDER_KEY, gender],
+          ]);
+          serviceManager.get("ApiService").authToken = token.key;
+          dispatch(authSuccess({ gender }));
+          dispatch(navigateAndReset("Dashboard"));
+        } else {
+          dispatch({
+            type: AUTH_FAILURE,
+            payload: { message },
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({
+          type: AUTH_FAILURE,
+          payload: { message: "Request failed!" },
+        });
+      });
   };
 }
 

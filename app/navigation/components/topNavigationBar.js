@@ -37,7 +37,7 @@ class TopNavigationBarComponent extends React.Component {
           alignment="center"
           title={title}
           leftControl={leftControlElement}
-          style={{ backgroundColor: "#006bc2" }}
+          style={{ backgroundColor: "#6844c9" }}
           titleStyle={{ color: "#ffffff" }}
         />
       </SafeAreaView>
