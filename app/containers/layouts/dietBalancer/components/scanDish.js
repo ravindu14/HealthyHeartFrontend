@@ -5,17 +5,21 @@ import { withStyles, Button } from "react-native-ui-kitten";
 import { LinearGradient } from "expo-linear-gradient";
 import { navigate } from "@app/actions/routes";
 import { ASYNC_STATUS } from "@app/constants/async";
-
+import { initiateFood, getScannedFood } from "@app/actions/food";
 import { getCalories } from "@app/helpers/helpers/objects";
 
 import Alert from "@app/components/Alert";
 import ImageUpload from "@app/components/common/ImageUpload";
 
 class ScanFoodDishScreen extends Component {
+  componentDidMount() {
+    this.props.initiateFood();
+  }
+
   onTakePhoto = (baseImage) => {
     const { getDetectedFood } = this.props;
 
-    console.log(baseImage);
+    this.props.getScannedFood({ base_string: baseImage });
   };
 
   render() {
@@ -100,10 +104,17 @@ class ScanFoodDishScreen extends Component {
   }
 }
 
-const Actions = {};
+const Actions = {
+  initiateFood,
+  getScannedFood,
+};
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    status: state.food.status,
+    notification: state.food.notification,
+    predictedResult: state.food.predictedResult,
+  };
 }
 
 const ScanFoodDishScreenContainer = connect(

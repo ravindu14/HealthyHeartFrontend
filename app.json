@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "DiabDocFrontend",
-    "slug": "DiabDocFrontend",
+    "name": "HealthyHeartApp",
+    "slug": "HealthyHeartApp",
     "platforms": [
       "ios",
       "android",

@@ -14,7 +14,7 @@ import { theme } from "./app/theme";
 
 const settings = {
   api: {
-    baseUrl: "http://localhost:8080",
+    baseUrl: "https://damp-badlands-04320.herokuapp.com",
   },
 };
 

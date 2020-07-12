@@ -15,11 +15,25 @@ class DietPlanScreen extends Component {
     selectedIndex: 0,
   };
 
+  componentDidMount() {
+    this.props.getUserData();
+  }
+
   onSelect = (selectedIndex) => {
     this.setState({ selectedIndex });
   };
 
   render() {
+    const { status, notification, userDetails } = this.props;
+
+    if (status === ASYNC_STATUS.LOADING) {
+      return (
+        <LinearGradient colors={["#553fd1", "#ffffff"]} style={{ flex: 1 }}>
+          <ActivityIndicator size="large" color="#ffffff" />
+        </LinearGradient>
+      );
+    }
+
     return (
       <LinearGradient colors={["#553fd1", "#ffffff"]} style={{ flex: 1 }}>
         <TabView
@@ -39,10 +53,16 @@ class DietPlanScreen extends Component {
   }
 }
 
-const Actions = {};
+const Actions = {
+  getUserData,
+};
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    status: state.auth.status,
+    notification: state.auth.notification,
+    userDetails: state.auth.userDetails,
+  };
 }
 
 export default connect(mapStateToProps, Actions)(DietPlanScreen);
