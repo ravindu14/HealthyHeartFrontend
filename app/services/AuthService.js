@@ -25,6 +25,10 @@ class AuthService {
   updateUser(payload: Object) {
     return this.api.put(`${this.endpoint}/profile`, payload);
   }
+
+  getHeartRateFromBT() {
+    return this.api.get(`${this.endpoint}/userData`);
+  }
 }
 
 export default AuthService;

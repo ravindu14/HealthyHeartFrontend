@@ -8,11 +8,18 @@ import SplashScreen from "@app/containers/layouts/splash";
 import { SignIn, SignUp } from "@app/containers/layouts/auth";
 
 import DietPlanScreen from "@app/containers/layouts/dietBalancer";
-import StressPlanScreen from "@app/containers/layouts/moodFixer";
+import StressPlanScreen from "@app/containers/layouts/riskAnalysis";
 import RiskCalculatorScreen from "@app/containers/layouts/riskCalculator";
 
 import ExerciseWarningScreen from "@app/containers/layouts/fitnessChecker";
 import ExerciseTestScreen from "@app/containers/layouts/fitnessChecker/screens/exerciseTest";
+import LegsFitnessTestScreen from "@app/containers/layouts/fitnessChecker/screens/legsFitnessTest";
+import MuscularFitnessTestScreen from "@app/containers/layouts/fitnessChecker/screens/muscularFitnessTest";
+import AerobicFitnessTestScreen from "@app/containers/layouts/fitnessChecker/screens/aerobicFitnessTest";
+import MyWorkoutsScreen from "@app/containers/layouts/fitnessChecker/screens/myWorkouts";
+import AbsWorkoutsScreen from "@app/containers/layouts/fitnessChecker/screens/myWorkouts/absWorkouts";
+import ArmsWorkoutsScreen from "@app/containers/layouts/fitnessChecker/screens/myWorkouts/armsWorkouts";
+import LegsWorkoutsScreen from "@app/containers/layouts/fitnessChecker/screens/myWorkouts/legsWorkouts";
 
 import { ArrowBackIcon } from "@app/assets/icons";
 import { TopNavigationBar } from "./components/topNavigationBar";
@@ -54,7 +61,7 @@ const DietPlanNavigationMap = createStackNavigator(
 
 const StressPlanNavigationMap = createStackNavigator(
   {
-    ["Stress Plan"]: StressPlanScreen,
+    ["Risk Analysis"]: StressPlanScreen,
   },
   {
     defaultNavigationOptions: {
@@ -65,7 +72,7 @@ const StressPlanNavigationMap = createStackNavigator(
 
 const RiskCalculatorNavigationMap = createStackNavigator(
   {
-    ["Risk Calculator"]: RiskCalculatorScreen,
+    ["Heart Beat"]: RiskCalculatorScreen,
   },
   {
     defaultNavigationOptions: {
@@ -78,6 +85,13 @@ const ExerciseNavigationMap = createStackNavigator(
   {
     ["Exercise Warning"]: ExerciseWarningScreen,
     ["Exercise Test"]: ExerciseTestScreen,
+    ["Legs Fitness"]: LegsFitnessTestScreen,
+    ["Muscular Fitness"]: MuscularFitnessTestScreen,
+    ["Aerobic Fitness"]: AerobicFitnessTestScreen,
+    ["My Workout Plan"]: MyWorkoutsScreen,
+    ["Abs Workouts"]: AbsWorkoutsScreen,
+    ["Arms Workouts"]: ArmsWorkoutsScreen,
+    ["Legs Workouts"]: LegsWorkoutsScreen,
   },
   {
     defaultNavigationOptions: {

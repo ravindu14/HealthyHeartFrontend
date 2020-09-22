@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
 import { ASYNC_STATUS } from "@app/constants/async";
-import { ActivityIndicator, View, Alert } from "react-native";
+import { ActivityIndicator, View } from "react-native";
+import Alert from "@app/components/Alert";
 import { TabView, Tab, Text, withStyles, Button } from "react-native-ui-kitten";
 import { navigate, navigateAndReset } from "@app/actions/routes";
 
@@ -14,7 +15,7 @@ class ExerciseTestScreen extends Component {
 
     if (status === ASYNC_STATUS.LOADING) {
       return (
-        <LinearGradient colors={["#005A00", "#000000"]} style={{ flex: 1 }}>
+        <LinearGradient colors={["#553fd1", "#000000"]} style={{ flex: 1 }}>
           <ActivityIndicator size="large" color="#ffffff" />
         </LinearGradient>
       );
@@ -37,16 +38,16 @@ class ExerciseTestScreen extends Component {
                       fontWeight: "bold",
                     }}
                   >
-                    Fitness Test 1
+                    Legs Fitness Test
                   </Text>
                 </View>
                 <Button
                   style={themedStyle.ActionButton}
                   size="giant"
                   appearance="outline"
-                  onPress={() => {}}
+                  onPress={() => this.props.navigate("Legs Fitness")}
                 >
-                  Start Test
+                  Start Jogging
                 </Button>
               </View>
               <View style={themedStyle.section}>
@@ -61,16 +62,16 @@ class ExerciseTestScreen extends Component {
                       fontWeight: "bold",
                     }}
                   >
-                    Fitness Test 2
+                    Muscular Fitness Test
                   </Text>
                 </View>
                 <Button
                   style={themedStyle.ActionButton}
                   size="giant"
                   appearance="outline"
-                  onPress={() => {}}
+                  onPress={() => this.props.navigate("Muscular Fitness")}
                 >
-                  Start Test
+                  Pushup Test
                 </Button>
               </View>
               <View style={themedStyle.section}>
@@ -85,16 +86,16 @@ class ExerciseTestScreen extends Component {
                       fontWeight: "bold",
                     }}
                   >
-                    Fitness Test 4
+                    Aerobic Fitness Test
                   </Text>
                 </View>
                 <Button
                   style={themedStyle.ActionButton}
                   size="giant"
                   appearance="outline"
-                  onPress={() => {}}
+                  onPress={() => this.props.navigate("Aerobic Fitness")}
                 >
-                  Start Test
+                  Target Heart Rate
                 </Button>
               </View>
             </View>
@@ -103,18 +104,9 @@ class ExerciseTestScreen extends Component {
               <Button
                 style={themedStyle.ActionButton}
                 size="giant"
-                onPress={() => {}}
+                onPress={() => this.props.navigate("My Workout Plan")}
               >
                 My Workout Plan
-              </Button>
-            </View>
-            <View style={themedStyle.buttonContainer}>
-              <Button
-                style={themedStyle.ActionButton}
-                size="giant"
-                onPress={() => {}}
-              >
-                Weekly Progress
               </Button>
             </View>
           </View>

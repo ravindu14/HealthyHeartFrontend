@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   Image,
   Dimensions,
+  NativeModules,
 } from "react-native";
 import { Button, Text, withStyles } from "react-native-ui-kitten";
 import { connect } from "react-redux";
@@ -12,11 +13,18 @@ import { LinearGradient } from "expo-linear-gradient";
 import { navigateAndReset } from "@app/actions/routes";
 import { ASYNC_STATUS } from "@app/constants/async";
 import { miBandImage } from "@app/assets";
+import { BTDeviceManager } from "../../../helpers/helpers/reactNative";
+import { getHeartRate } from "../../../actions/heartRate";
 
 const dimensions = Dimensions.get("window");
 const imageHeight = Math.round((dimensions.width * 9) / 16);
 const imageWidth = dimensions.width;
 class RiskCalculator extends Component {
+  state = {
+    loading: false,
+    btDevice: 0,
+  };
+
   searchBluetoothDevices = () => {
     NativeModules.DeviceConnector.enableBTAndDiscover(
       (error, deviceBondLevel) => {
@@ -51,8 +59,43 @@ class RiskCalculator extends Component {
     });
   };
 
+  BTDeviceManager = () => {
+    const { btDevice } = this.state;
+    if (btDevice) {
+      clearTimeout(btDevice);
+    }
+
+    this.setState({
+      ...this.state,
+      loading: true,
+      btDevice: setTimeout(() => this.closeConnection(), 1000),
+    });
+  };
+
+  closeConnection = () => {
+    this.setState({
+      ...this.state,
+      loading: false,
+    });
+  };
+
   render() {
-    const { themedStyle } = this.props;
+    const {
+      themedStyle,
+      BTDeviceManager,
+      getHeartRate,
+      status,
+      heartRate,
+    } = this.props;
+    const { loading } = this.state;
+
+    if (loading || status === ASYNC_STATUS.LOADING) {
+      return (
+        <LinearGradient colors={["#553fd1", "#000000"]} style={{ flex: 1 }}>
+          <ActivityIndicator size="large" color="#ffffff" />
+        </LinearGradient>
+      );
+    }
 
     return (
       <LinearGradient colors={["#553fd1", "#ffffff"]} style={{ flex: 1 }}>
@@ -63,49 +106,51 @@ class RiskCalculator extends Component {
               style={{ maxWidth: 200, maxHeight: 300 }}
             />
           </View>
-          <View style={themedStyle.predictionContainer}>
-            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-              <Text
-                style={{
-                  color: "#ffffff",
-                  fontSize: 14,
-                  marginTop: 10,
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                  fontWeight: "bold",
-                }}
-              >
-                Your heartbeat reading value
-              </Text>
+          {heartRate && (
+            <View style={themedStyle.predictionContainer}>
+              <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+                <Text
+                  style={{
+                    color: "#ffffff",
+                    fontSize: 14,
+                    marginTop: 10,
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Your heartbeat reading value
+                </Text>
+              </View>
+              <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+                <Text
+                  style={{
+                    color: "#d9d5f0",
+                    fontSize: 30,
+                    marginTop: 10,
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    fontWeight: "900",
+                    lineHeight: 60,
+                  }}
+                >
+                  {heartRate}
+                </Text>
+              </View>
             </View>
-            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-              <Text
-                style={{
-                  color: "#d9d5f0",
-                  fontSize: 30,
-                  marginTop: 10,
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                  fontWeight: "900",
-                  lineHeight: 60,
-                }}
-              >
-                72 beats/second
-              </Text>
-            </View>
-          </View>
+          )}
           <View style={themedStyle.buttonContainer}>
             <Button
               style={themedStyle.ActionButton}
               size="giant"
-              onPress={() => {}}
+              onPress={() => this.BTDeviceManager()}
             >
               Link With My Band
             </Button>
             <Button
               style={themedStyle.ActionButton}
               size="giant"
-              onPress={() => {}}
+              onPress={getHeartRate}
             >
               Get My Heart Rate
             </Button>
@@ -117,10 +162,14 @@ class RiskCalculator extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    status: state.heart.status,
+    notification: state.heart.notification,
+    heartRate: state.heart.heartRate,
+  };
 }
 
-const Actions = {};
+const Actions = { getHeartRate };
 
 const RiskCalculatorContainer = connect(
   mapStateToProps,

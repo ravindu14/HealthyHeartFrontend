@@ -5,8 +5,7 @@ class FoodService {
   api: ApiServiceInterface;
 
   endpoint: string = "/auth";
-  pythonApiFood: string = "http://52.149.8.145:5000/expression";
-  //pythonApiMealPlan: string = "http://tdasun94.pythonanywhere.com/meal_plan";
+  pythonApiFood: string = "http://52.255.157.87:5000/expression";
 
   constructor(apiService: ApiServiceInterface) {
     this.api = apiService;

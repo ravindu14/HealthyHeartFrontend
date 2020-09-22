@@ -89,9 +89,9 @@ class HomeScreen extends Component {
               route: "Diet Plan",
             },
             {
-              title: "Mood Fixer",
+              title: "Risk Calculator",
               icon: moodPlanIcon,
-              route: "Stress Plan",
+              route: "Risk Analysis",
             },
             {
               title: "Fitness Checker",

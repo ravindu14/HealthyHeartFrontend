@@ -5354,6 +5354,13 @@ expo-pwa@0.0.3:
     fs-extra "^9.0.0"
     update-check "1.5.3"
 
+expo-sensors@^9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/expo-sensors/-/expo-sensors-9.0.1.tgz#dcaccf0c6b1d6db2283150439482315e41060778"
+  integrity sha512-dsMCehc9YVW+41AysFLsx5Ikyg/Dul13e+j5JiZnHLTbJucBR3UiBE+zh10KdhYG/qORZhBmYYt4OYOhvlxmbA==
+  dependencies:
+    invariant "^2.2.4"
+
 expo-sqlite@~8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/expo-sqlite/-/expo-sqlite-8.1.0.tgz#858eb28e1143db281de8a49c99b4a953a81d0834"
@@ -10009,7 +10016,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -10298,6 +10305,13 @@ react-native-keyboard-aware-scroll-view@^0.9.1:
     prop-types "^15.6.2"
     react-native-iphone-x-helper "^1.0.3"
 
+react-native-material-cards@^1.0.15:
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/react-native-material-cards/-/react-native-material-cards-1.0.15.tgz#bbc741e3ea6c60e67b336b92a5394a95c341a8d5"
+  integrity sha512-7mJ8Hxincgyd/oXuC3jcblyFwasL3Rpfs++AFjfMJr8yUP5GxKe4H89CTbdxmP9AWI8LkTK0lU1tOfhHY6AGDA==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-safe-area-context@^0.7.3:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-0.7.3.tgz#ad6bd4abbabe195332c53810e4ce5851eb21aa2a"
@@ -10323,6 +10337,13 @@ react-native-speedometer-chart@^0.7.5:
   integrity sha512-50hjoeQb6CK1ehyAGWCGD5zLvCHY1SpyGcUrfyxI8npcKB/dA6B/LDtdRgVx1E/tuk3hsgx09aIEgSSyE6jjUg==
   dependencies:
     color "^3.1.2"
+    prop-types "^15.7.2"
+
+react-native-stopwatch-timer@0.0.21:
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/react-native-stopwatch-timer/-/react-native-stopwatch-timer-0.0.21.tgz#52c39f603e36c538bed3466212b1bfb350ed452f"
+  integrity sha512-qFFsD85NkBT1nxo32HMGq3XAtQyMC09p9ZDIEuOED2BOxgs0UpWg/FSTA0MmEoIKMyXUwSE5VxEzBaGP3z1HFw==
+  dependencies:
     prop-types "^15.7.2"
 
 react-native-svg@11.0.1:

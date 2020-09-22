@@ -9,23 +9,29 @@ export const removeEmptyKeys = (obj) => {
 
 export const getCalories = (item) => {
   switch (item) {
+    case "Bread ":
+      return 200;
     case "Burger":
-      return "2.95 Cal/g";
-    case "Hoppers":
-      return "1.65 Cal/g";
+      return 700;
+    case "Cake":
+      return 280;
+    case "Eggs":
+      return 85;
+    case "Fish":
+      return 218;
     case "Noodles":
-      return "1.38 Cal/g";
+      return 260;
+    case "Oisters":
+      return 150;
     case "Pizza":
-      return "2.66 Cal/g";
+      return 740;
     case "Rice":
-      return "1.30 Cal/g";
-    case "Rolls":
-      return "2.77 Cal/g";
+      return 190;
     case "Rottie":
-      return "1.20 Cal/g";
-    case "Samosa":
-      return "2.70 Cal/g";
+      return 190;
+    case "Soup":
+      return 150;
     default:
-      return "3.12 Cal/g";
+      return 600;
   }
 };

@@ -27,7 +27,7 @@ class ScanFoodDishScreen extends Component {
 
     if (status === ASYNC_STATUS.LOADING) {
       return (
-        <LinearGradient colors={["#005A00", "#000000"]} style={{ flex: 1 }}>
+        <LinearGradient colors={["#553fd1", "#000000"]} style={{ flex: 1 }}>
           <ActivityIndicator size="large" color="#ffffff" />
         </LinearGradient>
       );
@@ -40,65 +40,70 @@ class ScanFoodDishScreen extends Component {
             onFinishUploading={(baseImage) => this.onTakePhoto(baseImage)}
           />
         </View>
-        <View style={themedStyle.predictionContainer}>
-          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-            <Text
-              style={{
-                color: "#ffffff",
-                fontSize: 14,
-                marginTop: 10,
-                marginLeft: "auto",
-                marginRight: "auto",
-                fontWeight: "bold",
-              }}
-            >
-              Scanned food item
-            </Text>
+        {predictedResult && (
+          <View style={themedStyle.predictionContainer}>
+            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+              <Text
+                style={{
+                  color: "#ffffff",
+                  fontSize: 14,
+                  marginTop: 10,
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  fontWeight: "bold",
+                }}
+              >
+                Scanned food item
+              </Text>
+            </View>
+            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+              <Text
+                style={{
+                  color: "#d9d5f0",
+                  fontSize: 30,
+                  marginTop: 10,
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  fontWeight: "900",
+                }}
+              >
+                {predictedResult}
+              </Text>
+            </View>
+            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+              <Text
+                style={{
+                  color: "#ffffff",
+                  fontSize: 14,
+                  marginTop: 20,
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  fontWeight: "bold",
+                }}
+              >
+                Calorie intake amount
+              </Text>
+            </View>
+            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+              <Text
+                style={{
+                  color: "#d9d5f0",
+                  fontSize: 30,
+                  marginTop: 10,
+                  marginBottom: 10,
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  fontWeight: "900",
+                }}
+              >
+                {`${getCalories(predictedResult)} Calories`}
+              </Text>
+            </View>
           </View>
-          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-            <Text
-              style={{
-                color: "#d9d5f0",
-                fontSize: 30,
-                marginTop: 10,
-                marginLeft: "auto",
-                marginRight: "auto",
-                fontWeight: "900",
-              }}
-            >
-              Burger
-            </Text>
-          </View>
-          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-            <Text
-              style={{
-                color: "#ffffff",
-                fontSize: 14,
-                marginTop: 20,
-                marginLeft: "auto",
-                marginRight: "auto",
-                fontWeight: "bold",
-              }}
-            >
-              Calorie intake amount
-            </Text>
-          </View>
-          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-            <Text
-              style={{
-                color: "#d9d5f0",
-                fontSize: 30,
-                marginTop: 10,
-                marginBottom: 10,
-                marginLeft: "auto",
-                marginRight: "auto",
-                fontWeight: "900",
-              }}
-            >
-              640 Calories
-            </Text>
-          </View>
-        </View>
+        )}
+        {notification !== null && (
+          <Alert status={Alert.STATUS.DANGER}>{notification}</Alert>
+        )}
       </View>
     );
   }
