@@ -8,18 +8,17 @@ class ExerciseService {
   pythonApiExLeg: string = "http://52.255.157.87:5000/getlegsshedule";
   pythonApiExArm: string = "http://52.255.157.87:5000/getarmsshedule";
   pythonApiExAbs: string = "http://52.255.157.87:5000/getabsshedule";
+  pythonApiFood: string = "http://52.255.157.87:5000/food";
 
   constructor(apiService: ApiServiceInterface) {
     this.api = apiService;
   }
 
   getLegsExercises(payload) {
-    console.log(payload);
     return axios.post(this.pythonApiExLeg, payload);
   }
 
   getArmsExercises(payload) {
-    console.log(payload);
     return axios.post(this.pythonApiExArm, payload);
   }
 

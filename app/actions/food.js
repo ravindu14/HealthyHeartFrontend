@@ -34,27 +34,14 @@ export function getScannedFood(payload) {
     const foodService = serviceManager.get("FoodService");
 
     foodService
-      .getScannedFood(payload)
-      .then(({ data }) => {
-        if (
-          data &&
-          data.results &&
-          data.results.length > 0 &&
-          data.results[0].predictedResult
-        ) {
-          dispatch({
-            type: PREDICT_FOOD_SUCCESS,
-            payload: data.results[0].predictedResult,
-          });
-        } else {
-          dispatch({
-            type: FOOD_FAILURE,
-            payload: { message: "Prediction failed!" },
-          });
-        }
+      .getFoodPrediction(payload)
+      .then((res) => {
+        dispatch({
+          type: PREDICT_FOOD_SUCCESS,
+          payload: res.data.result,
+        });
       })
       .catch((error) => {
-        console.log(error);
         dispatch({
           type: FOOD_FAILURE,
           payload: { message: "Prediction failed!" },

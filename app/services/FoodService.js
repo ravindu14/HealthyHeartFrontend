@@ -11,8 +11,8 @@ class FoodService {
     this.api = apiService;
   }
 
-  getScannedFood(payload) {
-    return axios.post(this.pythonApiFood, payload);
+  getFoodPrediction(payload) {
+    return axios.post("http://52.255.157.87:5000/food", payload);
   }
 
   getMealPlan(payload) {
