@@ -5,7 +5,7 @@ class FoodService {
   api: ApiServiceInterface;
 
   endpoint: string = "/auth";
-  pythonApiFood: string = "http://52.255.157.87:5000/expression";
+  pythonApiFood: string = "http://52.255.157.87:5000/food";
 
   constructor(apiService: ApiServiceInterface) {
     this.api = apiService;
