@@ -19,7 +19,7 @@ class ScanFoodDishScreen extends Component {
   onTakePhoto = (baseImage) => {
     const { getDetectedFood } = this.props;
 
-    this.props.getScannedFood({ base_string: baseImage });
+    this.props.getScannedFood({ text: baseImage });
   };
 
   render() {
