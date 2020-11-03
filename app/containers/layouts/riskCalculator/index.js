@@ -14,7 +14,6 @@ import { navigateAndReset } from "@app/actions/routes";
 import { ASYNC_STATUS } from "@app/constants/async";
 import { miBandImage } from "@app/assets";
 import { BTDeviceManager } from "../../../helpers/helpers/reactNative";
-import { getHeartRate } from "../../../actions/heartRate";
 
 const dimensions = Dimensions.get("window");
 const imageHeight = Math.round((dimensions.width * 9) / 16);
@@ -23,6 +22,8 @@ class RiskCalculator extends Component {
   state = {
     loading: false,
     btDevice: 0,
+    heartBeatRate: 0,
+    deviceBondLevel: 0,
   };
 
   searchBluetoothDevices = () => {
@@ -80,14 +81,8 @@ class RiskCalculator extends Component {
   };
 
   render() {
-    const {
-      themedStyle,
-      BTDeviceManager,
-      getHeartRate,
-      status,
-      heartRate,
-    } = this.props;
-    const { loading } = this.state;
+    const { themedStyle, BTDeviceManager, status, heartRate } = this.props;
+    const { loading, heartBeatRate } = this.state;
 
     if (loading || status === ASYNC_STATUS.LOADING) {
       return (
@@ -106,51 +101,50 @@ class RiskCalculator extends Component {
               style={{ maxWidth: 200, maxHeight: 300 }}
             />
           </View>
-          {heartRate && (
-            <View style={themedStyle.predictionContainer}>
-              <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-                <Text
-                  style={{
-                    color: "#ffffff",
-                    fontSize: 14,
-                    marginTop: 10,
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Your heartbeat reading value
-                </Text>
-              </View>
-              <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-                <Text
-                  style={{
-                    color: "#d9d5f0",
-                    fontSize: 30,
-                    marginTop: 10,
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    fontWeight: "900",
-                    lineHeight: 60,
-                  }}
-                >
-                  {heartRate}
-                </Text>
-              </View>
+
+          <View style={themedStyle.predictionContainer}>
+            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+              <Text
+                style={{
+                  color: "#ffffff",
+                  fontSize: 14,
+                  marginTop: 10,
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  fontWeight: "bold",
+                }}
+              >
+                Your heartbeat reading value
+              </Text>
             </View>
-          )}
+            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+              <Text
+                style={{
+                  color: "#d9d5f0",
+                  fontSize: 30,
+                  marginTop: 10,
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  fontWeight: "900",
+                  lineHeight: 60,
+                }}
+              >
+                {heartBeatRate}
+              </Text>
+            </View>
+          </View>
           <View style={themedStyle.buttonContainer}>
             <Button
               style={themedStyle.ActionButton}
               size="giant"
-              onPress={() => this.BTDeviceManager()}
+              onPress={this.searchBluetoothDevices}
             >
               Link With My Band
             </Button>
             <Button
               style={themedStyle.ActionButton}
               size="giant"
-              onPress={getHeartRate}
+              onPress={this.activateHeartRateCalculation}
             >
               Get My Heart Rate
             </Button>
@@ -165,11 +159,10 @@ function mapStateToProps(state) {
   return {
     status: state.heart.status,
     notification: state.heart.notification,
-    heartRate: state.heart.heartRate,
   };
 }
 
-const Actions = { getHeartRate };
+const Actions = {};
 
 const RiskCalculatorContainer = connect(
   mapStateToProps,

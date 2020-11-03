@@ -22,8 +22,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "main"
     },
-    "description": ""
+    "description": "",
+    "android": {
+      "package": "main"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }
