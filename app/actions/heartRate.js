@@ -27,3 +27,31 @@ export function getHeartRate(payload) {
       });
   };
 }
+
+export function getRiskAnalysis(payload) {
+  return (dispatch, getState, serviceManager) => {
+    dispatch({
+      type: INIT_HEART_RATE,
+    });
+
+    const authService = serviceManager.get("AuthService");
+
+    authService
+      .getRiskAnalysis(payload)
+      .then((response) => {
+        dispatch({
+          type: ON_RECEIVE_ANALYSIS,
+          payload: response.data.Result,
+        });
+      })
+      .catch(() => {
+        dispatch({ type: FAILED });
+      });
+  };
+}
+
+export function initializeAnalysis() {
+  return (dispatch) => {
+    dispatch({ type: INITIALIZE_ANALYSIS });
+  };
+}

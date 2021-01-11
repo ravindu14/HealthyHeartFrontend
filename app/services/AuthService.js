@@ -5,6 +5,7 @@ class AuthService {
   api: ApiServiceInterface;
 
   endpoint: string = "/auth";
+  pythonApiRiskAnalysis: string = "http://52.163.126.150/PredictHeart";
 
   constructor(apiService: ApiServiceInterface) {
     this.api = apiService;
@@ -28,6 +29,10 @@ class AuthService {
 
   getHeartRateFromBT() {
     return this.api.get(`${this.endpoint}/userData`);
+  }
+
+  getRiskAnalysis(payload) {
+    return axios.post(this.pythonApiRiskAnalysis, payload);
   }
 }
 
